@@ -25,7 +25,7 @@ class Login extends Component {
     var text = event;
     if (text.match(/^[0-9\-]+$/) || text == ""){
       this.setState({username: text})
-      this.setState({error: ""})
+      this.setState({errormsg: ""})
     }
   }
 

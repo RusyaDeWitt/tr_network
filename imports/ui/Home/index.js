@@ -20,7 +20,8 @@ class Homepage extends Component {
     };
   }
 
-  logout() {
+  logout(event) {
+    event.preventDefault();
     Meteor.logout()
     window.location.reload()
   }
@@ -31,7 +32,7 @@ class Homepage extends Component {
         {this.props.user ?
           <div>
             <div>
-              <h1 onClick={() => this.logout()}>{"{Logout}"}</h1>
+              <h1 onClick={(event) => this.logout(event)}>{"{Logout}"}</h1>
             </div>
           </div>:""
         }
