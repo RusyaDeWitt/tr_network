@@ -92,21 +92,21 @@ class Login extends Component {
       <div className="container">
 
         <header className="main-page-h">
-          <h1 className="main-page-h1">TR - SOCIAL NETWORK</h1>
+          <h1 className="main-page-h1">TR</h1>
         </header>
 
 
       <div className="main-body">
-        <div className="registration-form">
+        <div className="registration-form ">
         {!Meteor.userId() ?
           <center>
             <h1 className="authtext">Регистрация</h1>
             <div className="width100 zeromargin">
               <div className="form authform upcorner zeromargin">
-                <button className="authtext" onClick={() => this.setState({option: 0})} className="form width50 leftcorner zeromargin">
+                <button  onClick={() => this.setState({option: 0})} className="form width50 leftcorner zeromargin">
                   AUTH
                 </button>
-                <button className="authtext" onClick={() => this.setState({option: 1})} className="form width50 rightcorner zeromargin">
+                <button onClick={() => this.setState({option: 1})} className="form width50 rightcorner zeromargin">
                   REGISTER
                 </button>
               </div>
