@@ -219,7 +219,7 @@ class Homepage extends Component {
                       var profile = Informations.findOne({username: this.state.chat});
                       return (
                         <div key={key} className="list width100 from">
-                          <p>{this.state.chat} ({profile.surname} {profile.name}): {message}</p>
+                          <p>{profile.surname} {profile.name}: {message}</p>
                         </div>
                       )
                     }
@@ -229,7 +229,7 @@ class Homepage extends Component {
                       var profile = Informations.findOne({username: username});
                       return (
                         <div key={key} className="list width100 to">
-                          <p>{info.username} ({profile.surname} {profile.name}): {message}</p>
+                          <p>{profile.surname} {profile.name}: {message}</p>
                         </div>
                       )
                     }
