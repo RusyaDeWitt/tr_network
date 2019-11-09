@@ -54,7 +54,7 @@ class Homepage extends Component {
     event.preventDefault();
     var username = this.state.chat;
     var msgtext = this.state.msgtext;
-    var usernamelist = Informations.find({status: {$ne: "blocked"}}).map((profile) => profile.username);
+    var usernamelist = Informations.find().map((profile) => profile.username);
     if(!usernamelist.includes(username)){
       var warn = "Пользователь не найден!"
       Bert.alert(warn, 'danger')
@@ -216,18 +216,20 @@ class Homepage extends Component {
                     if(msg.includes(from)){
                       var text = msg.split(from);
                       var message = text[1]
+                      var profile = Informations.findOne({username: this.state.chat});
                       return (
                         <div key={key} className="list width100 from">
-                          <p>{this.state.chat}: {message}</p>
+                          <p>{this.state.chat} ({profile.surname} {profile.name}): {message}</p>
                         </div>
                       )
                     }
                     else if(msg.includes(to)){
                       var text = msg.split(to);
                       var message = text[1]
+                      var profile = Informations.findOne({username: username});
                       return (
                         <div key={key} className="list width100 to">
-                          <p>{info.username}: {message}</p>
+                          <p>{info.username} ({profile.surname} {profile.name}): {message}</p>
                         </div>
                       )
                     }
