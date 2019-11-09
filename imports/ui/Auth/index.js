@@ -90,15 +90,23 @@ class Login extends Component {
   render() {
     return (
       <div className="container">
+
+        <header className="main-page-h">
+          <h1 className="main-page-h1">TR - SOCIAL NETWORK</h1>
+        </header>
+
+
+      <div className="main-body">
+        <div className="registration-form">
         {!Meteor.userId() ?
           <center>
-            <h1 className="authtext">Для того чтобы воспользоваться данным сайтом, необходимо авторизоваться.</h1>
+            <h1 className="authtext">Регистрация</h1>
             <div className="width100 zeromargin">
               <div className="form authform upcorner zeromargin">
-                <button onClick={() => this.setState({option: 0})} className="form width50 leftcorner zeromargin">
+                <button className="authtext" onClick={() => this.setState({option: 0})} className="form width50 leftcorner zeromargin">
                   AUTH
                 </button>
-                <button onClick={() => this.setState({option: 1})} className="form width50 rightcorner zeromargin">
+                <button className="authtext" onClick={() => this.setState({option: 1})} className="form width50 rightcorner zeromargin">
                   REGISTER
                 </button>
               </div>
@@ -141,6 +149,12 @@ class Login extends Component {
           </center>:
           <Redirect to="/test"/>
         }
+        </div>
+        <div className="info-about-tr-p">
+
+        </div>
+        </div>
+
       </div>
     );
   }

@@ -185,8 +185,35 @@ header {
 .authtext {
   /* width: 575px; */
   width: 600px;
+  font-family: sans-serif;
 }
 
+.main-page-h {
+  text-align: center;
+  background-color: #7a286d;
+  height: 200px;
+  background-size: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.main-page-h1 {
+  margin: 0px;
+  padding-top: 50px;
+  color: white;
+  font-size: 100px;
+  font-family: sans-serif;
+}
+
+.registration-form {
+  margin-top: 150px;
+  width: 50%;
+  font-family: serif;
+}
+
+body {
+  margin: 0px
+}
 
 @media screen and (max-width: 992px){
   .mobile100 {

@@ -9,6 +9,7 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { Telegrams } from '../../api/telegrams.js';
 import AccountsUIWrapper from '../AccountsUIWrapper.js';
 
+
 // Telegram component - represents the whole app
 class Homepage extends Component {
   constructor(props) {
@@ -29,9 +30,10 @@ class Homepage extends Component {
   render() {
     return (
       <div className="container">
+
         {this.props.user ?
           <div>
-            <div>
+            <div className="logout-btn">
               <h1 onClick={(event) => this.logout(event)}>{"{Logout}"}</h1>
             </div>
           </div>:""
