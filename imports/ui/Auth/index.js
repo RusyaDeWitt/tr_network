@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Redirect } from "react-router-dom";
+import { Informations } from '../../api/informations';
 import { Telegrams } from '../../api/telegrams';
 import { Bert } from 'meteor/themeteorchef:bert';
 import classnames from 'classnames';
@@ -12,13 +13,27 @@ class Login extends Component {
     super(props);
 
     this.state = {
+      option: 0,
       errormsg: "",
-      attempt: 1,
       username: "",
       password: "",
-      option: 0,
-      code: "justapassword",
+      surname: "",
+      name: "",
     };
+  }
+
+  surname(event) {
+    var text = event;
+    if (text.match(/^[а-яА-Я]+$/) || text == ""){
+      this.setState({surname: text})
+    }
+  }
+
+  name(event) {
+    var text = event;
+    if (text.match(/^[а-яА-Я]+$/) || text == ""){
+      this.setState({name: text})
+    }
   }
 
   username(event) {
@@ -40,6 +55,8 @@ class Login extends Component {
     event.preventDefault();
     var username = this.state.username;
     var password = this.state.password;
+    var surname = this.state.surname;
+    var name = this.state.name;
     if(this.state.option){
       Accounts.createUser({username: username, password: password}, (error) => {
         if(error){
@@ -58,6 +75,7 @@ class Login extends Component {
           }
         }
         else {
+          Meteor.call('informations.insert', username.toString(), password.toString(), surname, name);
           window.location.reload()
         }
       });
@@ -87,6 +105,7 @@ class Login extends Component {
     }
   }
 
+
   render() {
     return (
       <div className="container">
@@ -100,14 +119,14 @@ class Login extends Component {
         <div className="registration-form ">
         {!Meteor.userId() ?
           <center>
-            <h1 className="authtext">Регистрация</h1>
+            <h1 className="authtext">Для того чтобы воспользоваться данным сайтом, необходимо авторизоваться.</h1>
             <div className="width100 zeromargin">
               <div className="form authform upcorner zeromargin">
-                <button  onClick={() => this.setState({option: 0})} className="form width50 leftcorner zeromargin">
-                  AUTH
+                <button onClick={() => this.setState({option: 0})} className="form width50 leftcorner zeromargin">
+                  Авторизация
                 </button>
                 <button onClick={() => this.setState({option: 1})} className="form width50 rightcorner zeromargin">
-                  REGISTER
+                  Регистрация
                 </button>
               </div>
             </div>
@@ -115,9 +134,26 @@ class Login extends Component {
               <div className="form authform downcorner zeromargin">
                 <div>
                   <form onSubmit={(event) => this.login(event)}>
-                    <h2 className="zeromargin left">
-                    {this.state.option == 0 ? "AUTH" : "REGISTER"}
+                    <h2 className="zeromargin left width100">
+                    {this.state.option == 0 ? "Авторизация" : "Регистрация"}
                     </h2>
+                    {this.state.option == 1 ?
+                    <div className="width100">
+                      <input
+                        type="text"
+                        className="form width50 leftcorner"
+                        value={this.state.surname}
+                        onChange={event => this.surname(event.target.value)}
+                        placeholder="Фамилия"
+                      />
+                      <input
+                        type="text"
+                        className="form width50 rightcorner"
+                        value={this.state.name}
+                        onChange={event => this.name(event.target.value)}
+                        placeholder="Имя"
+                      />
+                    </div>:""}
                     <input
                       className="form width100"
                       type="text"
@@ -140,7 +176,7 @@ class Login extends Component {
                       </span>:""
                     }
                     <button className="form width100 greenbg whitetext" onClick={(event) => this.login(event)}>
-                      {this.state.option == 0 ? "Вход" : "Регистрация"}
+                      {this.state.option == 0 ? "Авторизация" : "Регистрация"}
                     </button>
                   </form>
                 </div>

@@ -216,6 +216,14 @@ body {
   margin: 0px
 }
 
+.from {
+  color: #5ca08e;
+}
+
+.to {
+  color: #ea3c53;
+}
+
 @media screen and (max-width: 1400px){
   .mobile100 {
     width: 100%;
