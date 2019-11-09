@@ -14,28 +14,26 @@ header {
   border-radius: 4px;
   border-color: gray;
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 
-.form-medium {
-  padding: 8px;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  border-color: gray;
-  box-sizing: border-box;
+span{
+  font-family: sans-serif;
 }
 
-.form-small {
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  border-color: gray;
-  box-sizing: border-box;
+.chat-h {
+  text-align: center;
+  margin-left: 30px;
+  font-family: sans-serif;
+  font-size: 25px
 }
 
 .list {
-  text-align: center;
-  border-bottom: 1px solid gray;
+  margin-top: 20px;
+  text-align: left;
+  margin-left: 20px;
+  font-family: sans-serif;
+  font-size: 30px;
 }
 
 .each-p {
@@ -49,6 +47,10 @@ header {
 .text-left {
   float: left;
   padding-left: 15px;
+}
+
+.margin10px {
+  margin: 10px;
 }
 
 .text-right {
@@ -201,6 +203,14 @@ header {
   padding: 0px;
 }
 
+.main-page-span {
+  margin-left: 1350px;
+  margin-top: 0px;
+  padding-top: 12px;
+  color: white;
+  font-size: 20px;
+  font-family: sans-serif;
+}
 .main-page-h1 {
   margin-left: 150px;
   margin-top: 0px;
@@ -215,17 +225,24 @@ header {
   width: 50%;
   font-family: serif;
 }
+.profile-full-name {
+  font-family: sans-serif;
+}
 
 body {
   margin: 0px
 }
 
 .from {
-  color: #5ca08e;
+  margin-left: 50px
+}
+.message-text {
+  font-family: sans-serif;
+  font-size: 30px;
 }
 
 .to {
-  color: #ea3c53;
+  margin-left: 50px;
 }
 
 @media screen and (max-width: 1400px){
@@ -250,6 +267,10 @@ body {
 
   .authform {
     width: 100%
+  }
+
+  .main-page-span {
+    margin-left: 500px;
   }
 
   .authtext {

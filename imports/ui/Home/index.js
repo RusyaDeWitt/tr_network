@@ -81,26 +81,38 @@ class Homepage extends Component {
         return (
           <div key={info._id}>
             <center>
-              <div className="form width60 zeromargin upcorner">
-                <h2 className="zeromargin">Имя пользователя: {info.username}</h2>
-                <h2 className="zeromargin">{info.surname} {info.name}</h2>
-                <span onClick={(event) => this.logout(event)} className="redtext zeromargin">
-                  [выйти из аккаунта]
-                </span>
-              </div>
-              <div className="form width60 zeromargin downcorner">
+                <h2 className="profile-full-name">{info.surname} {info.name}</h2>
+
                 <div className="width100">
                   <h2 className="width100 left">
                     {this.state.chat == "" ?
                     <div>
                       {info.messages.length >= 1 ?
                       <div>
-                        <div className="left width30">
+                        <div className="left width30 margin10px">
                         </div>
                         <div className="width40">
-                          <span>Чаты:</span>
+                          <input
+                            type="text"
+                            className="form width40 nocorner margin10px"
+                            value={this.state.username}
+                            onChange={event => this.username(event.target.value)}
+                            placeholder="Имя пользователя"
+                          />
+                          <input
+                            type="text"
+                            className="form width40 nocorner margin10px"
+                            value={this.state.msgtext}
+                            onChange={event => this.msgtext(event.target.value)}
+                            placeholder="Текст сообщения"
+                          />
+                          <button onClick={(event) => this.sendfirstmsg(event)} className="form width20 nocorner greenbg whitetext">
+                            Отправить
+                          </button>
                         </div>
-                        <div className="right width30">
+
+                        <div className="left width30">
+                        <span className="chat-h">Чаты:</span>
                         </div>
                       </div>:
                       <div>
@@ -110,11 +122,11 @@ class Homepage extends Component {
                           </div>
                           <div className="width40">
                             <span>
-                              Вы еще не получали/отправляли сообщения
+                              У вас пока нет диалогов
                             </span>
                             <br />
                             <h5 onClick={() => this.setState({send: 1})} className="zeromargin from">
-                              [отправить сейчас]
+                              Написать
                             </h5>
                           </div>
                           <div className="right width30">
@@ -165,9 +177,6 @@ class Homepage extends Component {
                 {this.state.chat == "" ?
                 <div className="all">
                   <br />
-                  {info.messages.length >= 1 ?
-                    <hr />:""
-                  }
                   {info.messages.map((msg) => {
                     var key = msg + Math.floor(Math.random() * 100);
                     var start = msg.indexOf("[")
@@ -177,38 +186,19 @@ class Homepage extends Component {
                       userchats.push(from)
                       var profile = Informations.findOne({username: from});
                       return (
-                        <div key={key} className="list width100">
-                          <p onClick={() => this.setState({chat: from})}>
-                            {from} ({profile.surname} {profile.name})
-                          </p>
+                        <div key={key} className="list width70">
+                          <ul onClick={() => this.setState({chat: from})}>
+                             {profile.surname} {profile.name}
+                          </ul>
                         </div>
                       )
                     }
                   })}
-                  <input
-                    type="text"
-                    className="form width40 nocorner"
-                    value={this.state.username}
-                    onChange={event => this.username(event.target.value)}
-                    placeholder="Имя пользователя"
-                  />
-                  <input
-                    type="text"
-                    className="form width40 nocorner"
-                    value={this.state.msgtext}
-                    onChange={event => this.msgtext(event.target.value)}
-                    placeholder="Текст сообщения"
-                  />
-                  <button onClick={(event) => this.sendfirstmsg(event)} className="form width20 nocorner greenbg whitetext">
-                    Отправить
-                  </button>
                   {this.state.error != "" ?
                     <h4 className="zeromargin redtext">{this.state.error}</h4>:""
                   }
                 </div>:
                 <div className="all">
-                  <br />
-                  <hr />
                   {info.messages.map((msg) => {
                     var key = msg + Math.floor(Math.random() * 100);
                     var from = "[" + this.state.chat + "] =>";
@@ -219,7 +209,7 @@ class Homepage extends Component {
                       var profile = Informations.findOne({username: this.state.chat});
                       return (
                         <div key={key} className="list width100 from">
-                          <p>{profile.surname} {profile.name}: {message}</p>
+                          <p className="message-text">{profile.surname} {profile.name}: {message}</p>
                         </div>
                       )
                     }
@@ -229,7 +219,7 @@ class Homepage extends Component {
                       var profile = Informations.findOne({username: username});
                       return (
                         <div key={key} className="list width100 to">
-                          <p>{profile.surname} {profile.name}: {message}</p>
+                          <p className="message-text">{profile.surname} {profile.name}: {message}</p>
                         </div>
                       )
                     }
@@ -237,7 +227,7 @@ class Homepage extends Component {
                   <form>
                     <input
                       type="text"
-                      className="form width70 zeromargin nocorner"
+                      className="form width50 zeromargin nocorner"
                       value={this.state.msgtext}
                       onChange={event => this.msgtext(event.target.value)}
                       placeholder="Текст сообщения"
@@ -247,7 +237,6 @@ class Homepage extends Component {
                     </button>
                   </form>
                 </div>}
-              </div>
             </center>
           </div>
         );
@@ -258,6 +247,14 @@ class Homepage extends Component {
   render() {
     return (
       <div className="container">
+      <header className="main-page-h">
+        <h1 className="main-page-h1">TR
+        <span onClick={(event) => this.logout(event)} className="main-page-span">
+          Выйти
+        </span>
+        </h1>
+      </header>
+
         {this.props.user ?
           <div>
             <div>

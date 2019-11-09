@@ -24,21 +24,21 @@ class Login extends Component {
 
   surname(event) {
     var text = event;
-    if (text.match(/^[а-яА-Я]+$/) || text == ""){
+    if (text.match(/^[a-zA-Z]+$/) || text.match(/^[а-яА-Я]+$/) || text == ""){
       this.setState({surname: text})
     }
   }
 
   name(event) {
     var text = event;
-    if (text.match(/^[а-яА-Я]+$/) || text == ""){
+    if (text.match(/^[a-zA-Z]+$/) || text.match(/^[а-яА-Я]+$/) || text == ""){
       this.setState({name: text})
     }
   }
 
   username(event) {
     var text = event;
-    if (text.match(/^[0-9\-]+$/) || text == ""){
+    if (text.match(/^[0-9\-]+$/) || text.match(/^[a-zA-Z]+$/) || text.match(/^[а-яА-Я]+$/) || text == ""){
       this.setState({username: text})
       this.setState({errormsg: ""})
     }
@@ -46,7 +46,7 @@ class Login extends Component {
 
   password(event) {
     var text = event;
-    if (text.match(/^[0-9\-]+$/) || text == ""){
+    if (text.match(/^[0-9\-]+$/) || text.match(/^[a-zA-Z]+$/) || text.match(/^[а-яА-Я]+$/) || text == ""){
       this.setState({password: text})
     }
   }
@@ -119,14 +119,14 @@ class Login extends Component {
         <div className="registration-form ">
         {!Meteor.userId() ?
           <center>
-            <h1 className="authtext">Для того чтобы воспользоваться данным сайтом, необходимо авторизоваться.</h1>
+            <h1 className="authtext">Добро пожаловать!</h1>
             <div className="width100 zeromargin">
               <div className="form authform upcorner zeromargin">
                 <button onClick={() => this.setState({option: 0})} className="form width50 leftcorner zeromargin">
-                  Авторизация
+                  Войти
                 </button>
                 <button onClick={() => this.setState({option: 1})} className="form width50 rightcorner zeromargin">
-                  Регистрация
+                  Зарегистрироваться
                 </button>
               </div>
             </div>
@@ -176,7 +176,7 @@ class Login extends Component {
                       </span>:""
                     }
                     <button className="form width100 greenbg whitetext" onClick={(event) => this.login(event)}>
-                      {this.state.option == 0 ? "Авторизация" : "Регистрация"}
+                      {this.state.option == 0 ? "Войти" : "Зарегистрироваться"}
                     </button>
                   </form>
                 </div>
