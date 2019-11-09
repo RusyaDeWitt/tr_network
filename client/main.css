@@ -93,6 +93,10 @@ header {
   width: 30%;
 }
 
+.width20 {
+  width: 20%;
+}
+
 .zeromargin {
   margin: 0;
 }

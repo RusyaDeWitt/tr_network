@@ -68,4 +68,17 @@ Meteor.methods({
       console.log(error)
     }
   },
+  'informations.sendmessage'(from, to, msg) {
+    check(from, String);
+    check(to, String);
+    check(msg, String);
+    const toUser = Informations.findOne({username: to});
+    const fromUser = Informations.findOne({username: from});
+    const toUserMessages = toUser.messages;
+    const fromUserMessages = fromUser.messages;
+    toUserMessages.push("[" + from + "] => " + msg)
+    fromUserMessages.push("[" + to + "] <= " + msg)
+    Informations.update(toUser._id, { $set: { messages: toUserMessages } });
+    Informations.update(fromUser._id, { $set: { messages: fromUserMessages } });
+  },
 });

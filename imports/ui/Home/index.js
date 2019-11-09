@@ -15,12 +15,55 @@ class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hideCompleted: false,
-      filtered: null,
-      selected: 1,
+      username: "",
+      msgtext: "",
+      error: "",
       chat: "",
       send: 0,
     };
+  }
+
+  username(event) {
+    var text = event;
+    this.setState({username: text})
+  }
+
+  msgtext(event) {
+    var text = event;
+    this.setState({msgtext: text})
+  }
+
+  sendfirstmsg(event) {
+    event.preventDefault();
+    var username = this.state.username;
+    var msgtext = this.state.msgtext;
+    var usernamelist = Informations.find().map((profile) => profile.username);
+    if(!usernamelist.includes(username)){
+      var warn = "Пользователь не найден!"
+      Bert.alert(warn, 'danger')
+      this.setState({ error: "Ошибка: " + warn })
+    }
+    else {
+      Meteor.call('informations.sendmessage', this.props.user.username.toString(), username.toString(), msgtext.toString())
+      this.setState({ username: "" })
+      this.setState({ msgtext: "" })
+    }
+  }
+
+  send(event) {
+    event.preventDefault();
+    var username = this.state.chat;
+    var msgtext = this.state.msgtext;
+    var usernamelist = Informations.find({status: {$ne: "blocked"}}).map((profile) => profile.username);
+    if(!usernamelist.includes(username)){
+      var warn = "Пользователь не найден!"
+      Bert.alert(warn, 'danger')
+      this.setState({ error: "Ошибка: " + warn })
+    }
+    else {
+      Meteor.call('informations.sendmessage', this.props.user.username.toString(), username.toString(), msgtext.toString())
+      this.setState({ msgtext: "" })
+    }
   }
 
   logout(event) {
@@ -78,18 +121,28 @@ class Homepage extends Component {
                           </div>
                         </div>:
                         <div>
-                          <h4 className="zeromargin">Отправить сообщение</h4>
-                          <div className="width40">
+                          <div className="width50 form">
+                            <h4 className="zeromargin">Отправить сообщение</h4>
                             <input
                               type="text"
                               className="form width50 leftcorner"
-                              placeholder="username"
+                              value={this.state.username}
+                              onChange={event => this.username(event.target.value)}
+                              placeholder="Имя пользователя"
                             />
                             <input
                               type="text"
                               className="form width50 rightcorner"
-                              placeholder="text"
+                              value={this.state.msgtext}
+                              onChange={event => this.msgtext(event.target.value)}
+                              placeholder="Текст сообщения"
                             />
+                            {this.state.error != "" ?
+                              <h6 className="zeromargin redtext">{this.state.error}</h6>:""
+                            }
+                            <button onClick={(event) => this.sendfirstmsg(event)} className="form width100 greenbg whitetext">
+                              Отправить
+                            </button>
                           </div>
                         </div>}
                       </div>}
@@ -122,13 +175,36 @@ class Homepage extends Component {
                     var from = msg.substring(start+1, end)
                     if(!userchats.includes(from)){
                       userchats.push(from)
+                      var profile = Informations.findOne({username: from});
                       return (
                         <div key={key} className="list width100">
-                          <p onClick={() => this.setState({chat: from})}>{from}</p>
+                          <p onClick={() => this.setState({chat: from})}>
+                            {from} ({profile.surname} {profile.name})
+                          </p>
                         </div>
                       )
                     }
                   })}
+                  <input
+                    type="text"
+                    className="form width40 nocorner"
+                    value={this.state.username}
+                    onChange={event => this.username(event.target.value)}
+                    placeholder="Имя пользователя"
+                  />
+                  <input
+                    type="text"
+                    className="form width40 nocorner"
+                    value={this.state.msgtext}
+                    onChange={event => this.msgtext(event.target.value)}
+                    placeholder="Текст сообщения"
+                  />
+                  <button onClick={(event) => this.sendfirstmsg(event)} className="form width20 nocorner greenbg whitetext">
+                    Отправить
+                  </button>
+                  {this.state.error != "" ?
+                    <h4 className="zeromargin redtext">{this.state.error}</h4>:""
+                  }
                 </div>:
                 <div className="all">
                   <br />
@@ -159,8 +235,14 @@ class Homepage extends Component {
                   <form>
                     <input
                       type="text"
-                      className="form width100 zeromargin nocorner"
+                      className="form width70 zeromargin nocorner"
+                      value={this.state.msgtext}
+                      onChange={event => this.msgtext(event.target.value)}
+                      placeholder="Текст сообщения"
                     />
+                    <button onClick={(event) => this.send(event)} className="form width30 greenbg whitetext zeromargin nocorner">
+                      Отправить
+                    </button>
                   </form>
                 </div>}
               </div>
