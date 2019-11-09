@@ -1,0 +1,37 @@
+{
+  "name": "private8",
+  "private": true,
+  "scripts": {
+    "start": "meteor",
+    "test": "meteor test --once --driver-package meteortesting:mocha",
+    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.5",
+    "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
+    "crypto-js": "^3.1.9-1",
+    "meteor-node-stubs": "^0.4.1",
+    "moment": "^2.24.0",
+    "node-qiwi-api": "^1.1.1",
+    "one-time-pad": "^1.0.3",
+    "public-ip": "^3.2.0",
+    "react": "^16.1.1",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.1.1",
+    "react-router-dom": "^5.1.2",
+    "simple-crypto-js": "^2.2.0",
+    "telegraf": "^3.32.0",
+    "telegraf-flow": "^8.3.0"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.js",
+      "server": "server/main.js"
+    }
+  },
+  "devDependencies": {
+    "chai": "^4.2.0"
+  }
+}

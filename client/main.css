@@ -1,0 +1,199 @@
+header {
+  margin-bottom: 100px;
+}
+
+.margin {
+  margin-bottom: 100px;
+}
+
+.form {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  border-color: gray;
+  box-sizing: border-box;
+}
+
+.form-medium {
+  padding: 8px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  border-color: gray;
+  box-sizing: border-box;
+}
+
+.form-small {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  border-color: gray;
+  box-sizing: border-box;
+}
+
+.list {
+  text-align: center;
+  border-bottom: 1px solid gray;
+}
+
+.each-p {
+  font-size: 25px;
+}
+
+.indent {
+  padding-left: 15px;
+}
+
+.text-left {
+  float: left;
+  padding-left: 15px;
+}
+
+.text-right {
+  float: right;
+  padding-right: 15px;
+}
+
+.textline {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.width70 {
+  width: 70%;
+}
+
+.width60 {
+  width: 60%;
+}
+
+.width50 {
+  width: 50%;
+}
+
+.width40 {
+  width: 40%;
+}
+
+.width30 {
+  width: 30%;
+}
+
+.zeromargin {
+  margin: 0;
+}
+
+.graybg {
+  background-color: #CFCFCF;
+}
+
+.greentext {
+  color: #70a050;
+}
+
+.greenbg {
+  background-color: #70a050;
+}
+
+.redtext {
+  color: #E96245;
+}
+
+.redbg {
+  background-color: #E96245;
+}
+
+.bluetext {
+  color: #7B9FCF;
+}
+
+.bluebg {
+  background-color: #7B9FCF;
+}
+
+.whitetext {
+  color: white;
+}
+
+.upcorner {
+  border-radius: 4px 4px 0px 0px;
+}
+
+.downcorner {
+  border-radius: 0px 0px 4px 4px;
+}
+
+.leftcorner {
+  border-radius: 4px 0px 0px 4px;
+}
+
+.rightcorner {
+  border-radius: 0px 4px 4px 0px;
+}
+
+.nocorner {
+  border-radius: 0px 0px 0px 0px;
+}
+
+.grayborder {
+  border-top: 1px solid gray;
+  border-right: 1px solid gray;
+  border-left: 1px solid gray;
+}
+
+.grayborder-full {
+  border: 1px solid gray;
+  border-radius: 0px;
+}
+
+.flexdis {
+  display: flex;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+.unflex {
+  display: block;
+}
+
+.authform {
+  /*width: 480px;
+  height: 170px;*/
+  width: 500px;
+}
+
+.authtext {
+  /* width: 575px; */
+  width: 600px;
+}
+
+
+@media screen and (max-width: 992px){
+  .mobile100 {
+    width: 100%;
+  }
+  .mobileunflex {
+    display: block;
+    border-radius: 4px;
+  }
+}
