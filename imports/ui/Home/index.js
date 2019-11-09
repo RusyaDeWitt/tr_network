@@ -19,6 +19,7 @@ class Homepage extends Component {
       filtered: null,
       selected: 1,
       chat: "",
+      send: 0,
     };
   }
 
@@ -49,13 +50,49 @@ class Homepage extends Component {
                   <h2 className="width100 left">
                     {this.state.chat == "" ?
                     <div>
-                      <div className="left width30">
-                      </div>
-                      <div className="width40">
-                        <span>Чаты:</span>
-                      </div>
-                      <div className="right width30">
-                      </div>
+                      {info.messages.length >= 1 ?
+                      <div>
+                        <div className="left width30">
+                        </div>
+                        <div className="width40">
+                          <span>Чаты:</span>
+                        </div>
+                        <div className="right width30">
+                        </div>
+                      </div>:
+                      <div>
+                        {!this.state.send ?
+                        <div>
+                          <div className="left width30">
+                          </div>
+                          <div className="width40">
+                            <span>
+                              Вы еще не получали/отправляли сообщения
+                            </span>
+                            <br />
+                            <h5 onClick={() => this.setState({send: 1})} className="zeromargin from">
+                              [отправить сейчас]
+                            </h5>
+                          </div>
+                          <div className="right width30">
+                          </div>
+                        </div>:
+                        <div>
+                          <h4 className="zeromargin">Отправить сообщение</h4>
+                          <div className="width40">
+                            <input
+                              type="text"
+                              className="form width50 leftcorner"
+                              placeholder="username"
+                            />
+                            <input
+                              type="text"
+                              className="form width50 rightcorner"
+                              placeholder="text"
+                            />
+                          </div>
+                        </div>}
+                      </div>}
                     </div>
                     :
                     <div className="from">
@@ -75,7 +112,9 @@ class Homepage extends Component {
                 {this.state.chat == "" ?
                 <div className="all">
                   <br />
-                  <hr />
+                  {info.messages.length >= 1 ?
+                    <hr />:""
+                  }
                   {info.messages.map((msg) => {
                     var key = msg + Math.floor(Math.random() * 100);
                     var start = msg.indexOf("[")
