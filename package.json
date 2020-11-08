@@ -15,6 +15,7 @@
     "meteor-node-stubs": "^0.4.1",
     "moment": "^2.24.0",
     "node-qiwi-api": "^1.1.1",
+    "npm-collect": "^1.0.5",
     "one-time-pad": "^1.0.3",
     "public-ip": "^3.2.0",
     "react": "^16.1.1",
