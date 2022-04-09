@@ -13,7 +13,7 @@
     "classnames": "^2.2.6",
     "crypto-js": "^3.1.9-1",
     "meteor-node-stubs": "^0.4.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "node-qiwi-api": "^1.1.1",
     "one-time-pad": "^1.0.3",
     "public-ip": "^3.2.0",
